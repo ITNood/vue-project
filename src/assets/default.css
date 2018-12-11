@@ -1,0 +1,93 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 14px;
+}
+
+.martop {
+    margin-top: 50px;
+}
+
+.el-main {
+    margin-bottom: 50px;
+}
+
+#login_bg {
+    background-image: linear-gradient(to top, #0b9154, #44ccca);
+    height: 100vh;
+    width: 100%;
+}
+
+#logo {
+    margin-top: 8rem;
+    width: 40%;
+}
+
+.swiper-pagination-bullet {
+    background: white !important;
+}
+
+.swiper-pagination-bullet-active {
+    background: #42b983 !important
+}
+
+#personal {
+    background: url('../assets/line_bg.png') no-repeat bottom, linear-gradient(to bottom, #0b9154, #44ccca);
+    padding: 30px 20px;
+    margin-top: 50px !important;
+    min-height: 150px;
+    background-size: cover;
+}
+
+#personal>img {
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+    overflow: hidden;
+    border: none;
+}
+
+#personal>h4 {
+    font-size: 20px;
+    line-height: 3rem;
+}
+
+#personal>p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#personal>p>span {
+    font-weight: 600;
+}
+
+#link-list {
+    margin-top: 2rem;
+    padding: 0 15px;
+}
+
+#link-list>a {
+    display: block;
+    border-bottom: 1px solid #dbdbdb;
+    height: 4rem;
+    line-height: 4rem;
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: left;
+    position: relative;
+}
+
+#link-list>a>i {
+    position: absolute;
+    right: 0;
+    top: 1.5rem;
+    font-size: 16px;
+}
+
+#out {
+    margin-top: 2rem;
+    width: 100%;
+}
