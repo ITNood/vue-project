@@ -7,7 +7,7 @@
         v-for="(item,index) in news"
         :key="index"
         class="news-list"
-        to="/newsDetails"
+        :to="{path:'/details',query:{id:item.id}}"
       >
         <img :src="item.imgURL">
         <el-input
@@ -19,6 +19,7 @@
           <p>{{item.details}}</p>
         </div>
       </router-link>
+      <div id="message">{{newMsg}}</div>
     </el-main>
     <bottom></bottom>
   </div>
@@ -39,17 +40,25 @@ export default {
           details: "",
           id: ""
         }
-      ]
+      ],
+      newMsg: ""
     };
   },
   methods: {
     getNews() {
       let that = this;
-      this.$axios
-        .post("getMessage")
+      this.$axios({
+        method: "post",
+        url: "http://www.newos.com/getMessage",
+        headers: {
+          token: window.localStorage.getItem("token")
+        }
+      })
         .then(res => {
-          console.log(res);
-          if (res.data.res) {
+          // console.log(res);
+          if (res.data.res.length == 0) {
+            this.newMsg = "暂无消息";
+          } else {
             that.news = res.data.res;
           }
         })
@@ -67,35 +76,4 @@ export default {
 </script>
 
 <style scoped>
-.news-list {
-  border-bottom: 1px solid #dbdbdb;
-  display: block;
-  padding: 8px 0;
-  position: relative;
-  height: 60px;
-}
-.news-list > img {
-  position: absolute;
-  top: 8px;
-  left: 0;
-  width: 60px;
-  height: 60px;
-}
-.newContent {
-  padding-left: 70px;
-  text-align: left;
-  color: #2c3e50;
-  line-height: 1.5rem;
-}
-.newContent > h3 > span {
-  float: right;
-}
-.newContent > p {
-  font-size: 12px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
 </style>

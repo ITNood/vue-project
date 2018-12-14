@@ -39,10 +39,21 @@ export default {
   },
   methods: {
     getgoods() {
-      this.$axios
-        .post("getGoods")
-        .then(res => {})
-        .catch(err => {});
+      this.$axios({
+        method:'post',
+        url:'http://www.newos.com/getGoods',
+        headers:{
+          'token':window.localStorage.getItem('token')
+        }
+      }).then(res => {})
+        .catch(err => {}); 
+       //.post("getGoods")
+      //  this.$axios.post('getGoods').then(res=>{
+      //    console.log(res)
+      //  }).catch(err=>{
+
+      //  })
+        
     }
   },
   components: {

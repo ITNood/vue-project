@@ -8,23 +8,21 @@
         v-for="(list,index) in lists"
         :key="index"
       >
-        <img :src="list.imgURL">
-        <el-input
-          style="display:none"
-          :val="list.id"
-        />
-        <div class="listContent">
-          <el-row :gutter="20">
-            <el-col :span="12">
-              <h3>{{list.username}}</h3>
-              <p>{{list.date}}</p>
-            </el-col>
-            <el-col :span="12">
-              <h3>购入金额</h3>
-              <p style="color:#67c23a">{{list.amount}}</p>
-            </el-col>
-          </el-row>
-        </div>
+        <router-link :to="{path:'/details',query:{id:list.id}}">
+          <img :src="list.imgURL">
+          <div class="listContent">
+            <el-row :gutter="20">
+              <el-col :span="12">
+                <h3>{{list.username}}</h3>
+                <p>{{list.date}}</p>
+              </el-col>
+              <el-col :span="12">
+                <h3>购入金额</h3>
+                <p style="color:#67c23a">{{list.amount}}</p>
+              </el-col>
+            </el-row>
+          </div>
+        </router-link>
       </el-col>
     </el-main>
     <bottom></bottom>
@@ -52,8 +50,14 @@ export default {
   methods: {
     getList() {
       let that = this;
-      this.$axios
-        .post("marketList")
+      this.$axios({
+        method: "post",
+        url: "http://www.newos.com/marketList",
+        headers: {
+          token: window.localStorage.getItem("token")
+        }
+      })
+        //.post("marketList")
         .then(res => {
           if (res.data.res.buy) {
             that.lists = res.data.res.buy;
@@ -84,7 +88,7 @@ export default {
 .lists:last-child {
   margin-bottom: 0;
 }
-.lists > img {
+.lists > a > img {
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
@@ -94,6 +98,7 @@ export default {
 }
 .listContent {
   margin-left: 5rem;
+  color: #2c3e50;
 }
 .el-col-12 {
   line-height: 2rem;

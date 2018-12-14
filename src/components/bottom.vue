@@ -9,10 +9,12 @@
           :span="6"
           v-for="(item,index) in items"
           :key="index"
-          :class="{active:istrue===index}"
-          @click="handle=index"
         >
-          <router-link :to="item.URL">{{item.msg}}</router-link>
+          <router-link
+            :to="item.URL"
+            :class="{active:istrue==index}"
+            @click.native="handle(index)"
+          >{{item.msg}}</router-link>
         </el-col>
       </el-row>
     </el-footer>
@@ -24,16 +26,20 @@ export default {
   name: "Bottom",
   data() {
     return {
-      istrue: 0,
       items: [
         { msg: "首页", URL: "/home" },
         { msg: "市场", URL: "/market" },
         { msg: "消息", URL: "/news" },
         { msg: "我的", URL: "/me" }
-      ]
+      ],
+      istrue: 0
     };
   },
-  methods: {}
+  methods: {
+    handle(index) {
+      this.istrue = index;
+    }
+  }
 };
 </script>
 

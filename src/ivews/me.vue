@@ -33,12 +33,12 @@
 <script>
 import headDiv from "../components/head";
 import Bottom from "../components/bottom";
-import api from '../API/index.js'
+import api from "../API/index.js";
 export default {
   data() {
     return {
       titleMsg: "个人中心",
-      imageURL: require('../assets/list1.png'),
+      imageURL: require("../assets/list1.png"),
       name: "",
       message: "我是一只小小鸟！",
       lists: [
@@ -57,9 +57,15 @@ export default {
   methods: {
     out() {
       let that = this;
-     this.$axios.post("loginOut")
+      this.$axios({
+        method: "post",
+        url: "http://www.newos.com/loginOut",
+        headers: {
+          'token': window.localStorage.getItem("token")
+        }
+      })
         .then(res => {
-          console.log(res);
+          //console.log(res);
           window.localStorage.removeItem("token");
           let token = localStorage.getItem("token");
           if (!token) {
@@ -75,13 +81,19 @@ export default {
     //获取用户信息
     getUser() {
       let that = this;
-      this.$axios.post("getUser")
-        .then(res => {
-          console.log(res);
-         // that.imageURL = res.data.res.avatar;
-          that.name=res.data.res.username
+      this.$axios({
+        method:'post',
+        url:'http://www.newos.com/getUser',
+        headers:{
+          'token':window.localStorage.getItem('token')
+        }
+      }).then(res => {
+          // console.log(res);
+          // that.imageURL = res.data.res.avatar;
+          that.name = res.data.res.username;
         })
         .catch(err => {});
+        
     }
   },
   mounted() {
