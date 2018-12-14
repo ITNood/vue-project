@@ -12,8 +12,7 @@
         >
           <router-link
             :to="item.URL"
-            :class="{active:istrue==index}"
-            @click.native="handle(index)"
+            active-class ="active"
           >{{item.msg}}</router-link>
         </el-col>
       </el-row>
@@ -36,9 +35,7 @@ export default {
     };
   },
   methods: {
-    handle(index) {
-      this.istrue = index;
-    }
+   
   }
 };
 </script>
