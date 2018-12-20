@@ -41,7 +41,7 @@
 </template>
 
 <script>
-//import api from "../API/index.js";
+import api from "../API/index.js";
 export default {
   data() {
     return {
@@ -74,15 +74,15 @@ export default {
         if (valid) {
           let that = this;
           let data = this.ruleForm;
-          // api.minicart.template
-          //   .login("login", data)
-            this.$axios.post('login',data).then(res => {
+          api.minicart.template
+            .login("login", data)
+            .then(res => {
               console.log(res);
               if (!window.localStorage) {
                 return false;
               } else {
                 var storage = window.localStorage;
-                storage.setItem("token", res.data.res.token); //存储token
+                storage.setItem("token", res.res.token); //存储token
               }
               let token = window.localStorage.getItem("token"); //判断是否存在token并跳转路由
               if (token) {

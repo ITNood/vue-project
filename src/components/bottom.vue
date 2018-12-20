@@ -12,8 +12,11 @@
         >
           <router-link
             :to="item.URL"
-            active-class ="active"
-          >{{item.msg}}</router-link>
+            active-class="active"
+          >
+          <i :class="item.font" class="icon iconfont"></i>
+          {{item.msg}}
+          </router-link>
         </el-col>
       </el-row>
     </el-footer>
@@ -26,21 +29,18 @@ export default {
   data() {
     return {
       items: [
-        { msg: "首页", URL: "/home" },
-        { msg: "市场", URL: "/market" },
-        { msg: "消息", URL: "/news" },
-        { msg: "我的", URL: "/me" }
+        { msg: "首页", URL: "/home",font:'icon-home' },
+        { msg: "市场", URL: "/market",font:'icon-lefenshichang' },
+        { msg: "消息", URL: "/news",font:'icon-news' },
+        { msg: "我的", URL: "/me",font:'icon-aui-icon-my' }
       ],
-      istrue: 0
     };
   },
-  methods: {
-   
-  }
 };
 </script>
 
 <style scoped>
+@import '../assets/iconfont/iconfont.css';
 #footer {
   background: white;
   border-top: 1px solid #cfe4db;
@@ -48,15 +48,22 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 0;
+   padding:2px;
   z-index: 99;
 }
 #footer a {
   color: #2c3e50;
   display: block;
-  line-height: 49px;
+  text-decoration: none;
+  height:45px;
+ 
 }
-
+#footer a>i{
+  height:25px;
+  display:block;
+  font-size:20px;
+  line-height: 25px;
+}
 #footer .active a,
 .active {
   background: #f0f9eb;

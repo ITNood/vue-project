@@ -5,6 +5,10 @@
     font-size: 14px;
 }
 
+img {
+    border: none;
+}
+
 .martop {
     margin-top: 50px;
 }
@@ -21,7 +25,7 @@
 
 #logo {
     margin-top: 8rem;
-    width: 40%;
+    width: 30%;
 }
 
 .swiper-pagination-bullet {
@@ -75,9 +79,10 @@
     line-height: 4rem;
     color: #2c3e50;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     text-align: left;
     position: relative;
+    padding-left: 35px
 }
 
 #link-list>a>i {
@@ -87,11 +92,22 @@
     font-size: 16px;
 }
 
+#link-list>a>span {
+    position: absolute;
+    left: 5px;
+    font-size: 23px;
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
 #out {
     margin-top: 2rem;
     width: 100%;
 }
+
 /*------------------------news-----------------------------*/
+
 .news-list {
     /* border-bottom: 1px solid #dbdbdb; */
     display: block;
@@ -126,7 +142,8 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-#message{
-    font-size:20px;
-    margin-top:30px;
+
+#message {
+    font-size: 20px;
+    margin-top: 30px;
 }

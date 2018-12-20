@@ -7,8 +7,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'login',
-      component: function () {
+      name: 'Login',
+      component: ()=> {
         return import('../ivews/login')
       }
     },
@@ -16,7 +16,7 @@ export default new Router({
     {
       path: '/home',
       name: 'Home',
-      component: function () {
+      component: ()=>{
         return import('../ivews/home')
       },
       meta: {
@@ -27,7 +27,7 @@ export default new Router({
     {
       path: '/me',
       name: 'Me',
-      component: function () {
+      component: ()=> {
         return import('../ivews/me')
       }
     },
@@ -35,22 +35,36 @@ export default new Router({
     {
       path: '/market',
       name: 'Market',
-      component: function () {
+      component: ()=>{
         return import('../ivews/market')
       }
     },
     {
       path: '/news',
       name: 'News',
-      component: function () {
+      component: ()=> {
         return import('../ivews/news')
       }
     },
     {
       path: '/details',
       name: 'Details',
-      component: function () {
+      component: ()=> {
         return import ('../ivews/details')
+      }
+    },
+    {
+      path: '/container',
+      name: 'Container',
+      component: ()=>{
+        return import ('../ivews/container')
+      }
+    },
+    {
+      path: '/personalSet',
+      name: 'PersonalSet',
+      component:()=> {
+        return import('../ivews/personalSet')
       }
     }
    

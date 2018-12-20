@@ -4,22 +4,37 @@ import json_response_codes from './codes'
 import config from '../config'
 
 // 创建axios实例
+//let token = window.localStorage.getItem("token") 
 const Axios = axios.create({
     baseURL: "http://www.newos.com/",
-    timeout: 5000,
-    maxRedirects: 1
+    timeout: 5000,//超时请求
+    maxRedirects: 1,
+    headers: { "Content-Type": 'application/json' },
 })
+//拦截所有api请求，重新获取token
+Axios.interceptors.request.use(
+    config => {
+        let token = window.localStorage.getItem('token')
+        if (token) {
+            config.headers.Token = token
+        }
+        return config
+    },
+    err => {
+        return Promise.reject(err)
+    }
+)
+
 var loadinginstace;
 
 // override axios's default accept
-Axios.defaults.headers.common['Accept'] = 'application/json'
-
+//Axios.defaults.headers.common['Accept'] = 'application/json'
 
 // 拦截所有的 api 请求，未来可做权限检查，缓存，代理等
 Axios.interceptors.request.use(
     config => {
         // element ui Loading方法
-        loadinginstace = Loading.service({ fullscreen: true, text: '稍等片刻...' })
+        loadinginstace = Loading.service({ fullscreen: true, text: '加载中，请稍等...' })
         return config;
     },
     error => {
@@ -31,21 +46,28 @@ Axios.interceptors.request.use(
 
 // 拦截所有的 api 响应，可以实现自动弹窗报错
 Axios.interceptors.response.use(
-
     net_response => {   // when HTTP_STATUS in [ 200 , 299 ]
-
-        const json_response = net_response.data;
+        // const json_response = net_response.data;
         loadinginstace.close()
+        //判断登录状态，跳转路由
+        if (net_response.data.status === 500) {
+            alert(net_response.data.msg)
+            window.localStorage.removeItem('token')
+            window.location.href = "/"
+        } else if (net_response.data.status === 400) {
+            alert(net_response.data.msg)
+        }
 
-        if (json_response.status === json_response_codes.status) {
-            return Promise.resolve(json_response.data);
+        //返回数据
+        if (net_response.status === json_response_codes.status) {
+            return Promise.resolve(net_response.data);
         }
 
         Message({
             message: json_response.message || '服务器接口异常', type: 'error', duration: 6 * 1000
         });
 
-        return Promise.reject(json_response);
+        return Promise.reject(net_response);
     },
     error => {      // when HTTP_STATUS in [ 300 , 599 ]
 

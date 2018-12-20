@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import api from '../API/index.js'
 import headDiv from "../components/head";
 import Bottom from "../components/bottom";
 import Swiper from "../components/swiper";
@@ -39,20 +40,11 @@ export default {
   },
   methods: {
     getgoods() {
-      this.$axios({
-        method:'post',
-        url:'http://www.newos.com/getGoods',
-        headers:{
-          'token':window.localStorage.getItem('token')
-        }
-      }).then(res => {})
-        .catch(err => {}); 
-       //.post("getGoods")
-      //  this.$axios.post('getGoods').then(res=>{
-      //    console.log(res)
-      //  }).catch(err=>{
+      api.minicart.template.choices('getGoods').then(response=>{
 
-      //  })
+      }).catch(error=>{
+
+      })
         
     }
   },

@@ -1,7 +1,12 @@
 <template>
   <div>
     <headDiv :title="titleMsg"></headDiv>
-    <el-main class="martop">
+
+    <scroller
+      :on-infinite="infinite"
+      :noDataText="noDataText"
+      style="top:50px;bottom:50px;padding:10px 0;"
+    >
       <el-col
         :span="24"
         class="lists"
@@ -24,7 +29,8 @@
           </div>
         </router-link>
       </el-col>
-    </el-main>
+    </scroller>
+
     <bottom></bottom>
   </div>
 </template>
@@ -32,46 +38,51 @@
 <script>
 import HeadDiv from "../components/head";
 import Bottom from "../components/bottom";
+import api from "../API/index.js";
+
 export default {
   data() {
     return {
       titleMsg: "市场",
-      lists: [
-        {
-          imgURL: "",
-          id: "",
-          username: "",
-          date: "",
-          amount: ""
-        }
-      ]
+      lists: [],
+      noDataText:'没钱啦，别拉了...',
+      page: 1
     };
-  },
-  methods: {
-    getList() {
-      let that = this;
-      this.$axios({
-        method: "post",
-        url: "http://www.newos.com/marketList",
-        headers: {
-          token: window.localStorage.getItem("token")
-        }
-      })
-        //.post("marketList")
-        .then(res => {
-          if (res.data.res.buy) {
-            that.lists = res.data.res.buy;
-          }
-        })
-        .catch(err => {});
-    }
-  },
-  mounted() {
-    this.getList();
   },
   components: {
     HeadDiv,
     Bottom
+  },
+  mounted() {
+    this.getList();
+  },
+  methods: {
+    getList() {
+      let that = this;
+      api.minicart.template.choices("marketList").then(response => {
+        if (response.res.buy) {
+          that.lists = response.res.buy;
+        }
+      });
+    },
+    //上拉加载更多
+    infinite() {
+      this.page += 1;
+      console.log('page');
+      let arr = [];
+      setTimeout(() => {
+        let that = this;
+        api.minicart.template
+          .choices("marketList" + "&page" + this.page)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, 1000);
+    },
+
   }
 };
 </script>
@@ -83,7 +94,7 @@ export default {
   padding: 15px;
   position: relative;
   border-radius: 6px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 .lists:last-child {
   margin-bottom: 0;

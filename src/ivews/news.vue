@@ -28,45 +28,30 @@
 <script>
 import headDiv from "../components/head";
 import Bottom from "../components/bottom";
+import api from "../API/index.js";
 export default {
   data() {
     return {
       titleMsg: "消息",
-      news: [
-        {
-          imgURL: "",
-          title: "",
-          date: "",
-          details: "",
-          id: ""
-        }
-      ],
+      news: [],
       newMsg: ""
     };
+  },
+  created() {
+    this.getNews();
   },
   methods: {
     getNews() {
       let that = this;
-      this.$axios({
-        method: "post",
-        url: "http://www.newos.com/getMessage",
-        headers: {
-          token: window.localStorage.getItem("token")
+      api.minicart.template.choices("getMessage").then(response => {
+        console.log(response);
+        if (response.res.length == 0) {
+          that.newMsg = "暂无消息";
+        } else {
+          that.news = response.res;
         }
-      })
-        .then(res => {
-          // console.log(res);
-          if (res.data.res.length == 0) {
-            this.newMsg = "暂无消息";
-          } else {
-            that.news = res.data.res;
-          }
-        })
-        .catch(err => {});
+      });
     }
-  },
-  mounted() {
-    this.getNews();
   },
   components: {
     headDiv,

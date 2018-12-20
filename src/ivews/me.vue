@@ -14,6 +14,7 @@
           :key="index"
           :to="item.URL"
         >
+        <span :class="item.Class_list" class="icon iconfont"></span>
           {{item.text}}
           <i class="el-icon-arrow-right"></i>
         </router-link>
@@ -42,11 +43,11 @@ export default {
       name: "",
       message: "我是一只小小鸟！",
       lists: [
-        { text: "个性设置", URL: "/personalSet" },
-        { text: "账户管理", URL: "/userManage" },
-        { text: "地址管理", URL: "/addressManage" },
-        { text: "地址管理", URL: "/addressManage" },
-        { text: "地址管理", URL: "/addressManage" }
+        { text: "个性设置", URL: "/personalSet",Class_list:'icon-my'},
+        { text: "账户管理", URL: "/userManage" ,Class_list:'icon-qianbao'},
+        { text: "地址管理", URL: "/addressManage",Class_list:'icon-addressfill' },
+        { text: "关于APP", URL: "/about",Class_list:'icon-about' },
+        { text: "订单管理", URL: "/order",Class_list:'icon-dingdanguanli' }
       ]
     };
   },
@@ -57,43 +58,24 @@ export default {
   methods: {
     out() {
       let that = this;
-      this.$axios({
-        method: "post",
-        url: "http://www.newos.com/loginOut",
-        headers: {
-          'token': window.localStorage.getItem("token")
+      api.minicart.template.choices('loginOut').then(reponse=>{
+        window.localStorage.removeItem('token')
+        let token=localStorage.getItem('token')
+        if(!token){
+          that.$router.push('/')
         }
+      }).catch(error=>{
+        console.log(error)
+        alert('退出失败，请重试！')
       })
-        .then(res => {
-          //console.log(res);
-          window.localStorage.removeItem("token");
-          let token = localStorage.getItem("token");
-          if (!token) {
-            that.$router.push("/");
-          } else {
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          alert("退出失败，请重试！");
-        });
     },
     //获取用户信息
     getUser() {
       let that = this;
-      this.$axios({
-        method:'post',
-        url:'http://www.newos.com/getUser',
-        headers:{
-          'token':window.localStorage.getItem('token')
-        }
-      }).then(res => {
-          // console.log(res);
-          // that.imageURL = res.data.res.avatar;
-          that.name = res.data.res.username;
+        api.minicart.template.choices('getUser').then(response=>{
+          console.log(response)
+         that.name=response.res.username
         })
-        .catch(err => {});
-        
     }
   },
   mounted() {
@@ -103,6 +85,7 @@ export default {
 </script>
 
 <style scoped>
+@import '../assets/iconfont/iconfont.css';
 .el-main {
   padding: 0;
 }

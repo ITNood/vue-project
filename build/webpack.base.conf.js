@@ -48,6 +48,15 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
+      //添加less
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          'less-loader'
+        ]
+      },
+
       {
         test: /\.js$/,
         loader: 'babel-loader',
