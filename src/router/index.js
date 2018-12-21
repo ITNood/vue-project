@@ -66,6 +66,13 @@ export default new Router({
       component:()=> {
         return import('../ivews/personalSet')
       }
+    },
+    {
+      path: '/test',
+      name: 'Test',
+      component: () => {
+        return import('../ivews/test')
+      }
     }
    
   ]

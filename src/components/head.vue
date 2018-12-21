@@ -1,25 +1,20 @@
 <template>
-  <div>
-    <el-header
-      id="top"
-      height="50px"
-    >
-      <!-- <el-col :span="6">
-          <i class="el-icon-arrow-left return"></i>
-        </el-col> -->
-      <el-col
-        :span="12"
-        :offset="6"
-        id="title"
-      >{{title}}</el-col>
-    </el-header>
-  </div>
+  <el-header
+    id="top"
+    height="50px"
+  >
+    <el-col
+      :span="12"
+      :offset="6"
+      id="title"
+    >{{title}}</el-col>
+  </el-header>
 </template>
 
 <script>
 export default {
   name: "headDiv",
-  props:['title'],
+  props: ["title"],
   data() {
     return {};
   }
@@ -28,16 +23,16 @@ export default {
 
 <style scoped>
 #top {
-    background: #42b983;
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:99
+  background: #42b983;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
 }
-#title{
-    line-height: 50px;
-    color:white;
-    font-size:18px;
+#title {
+  line-height: 50px;
+  color: white;
+  font-size: 18px;
 }
 </style>

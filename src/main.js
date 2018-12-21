@@ -7,14 +7,11 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/default.css'
 import 'swiper/dist/css/swiper.css'
-import VueScroller from "vue-scroller";
 
-
-Vue.use(VueScroller);
-
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
-Vue.use(ElementUI)
+
 
 
 /* eslint-disable no-new */

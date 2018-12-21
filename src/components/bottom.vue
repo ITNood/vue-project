@@ -1,26 +1,27 @@
 <template>
-  <div>
-    <el-footer
-      id="footer"
-      height="50px"
-    >
-      <el-row>
-        <el-col
-          :span="6"
-          v-for="(item,index) in items"
-          :key="index"
+  <el-footer
+    id="footer"
+    height="50px"
+  >
+    <el-row>
+      <el-col
+        :span="6"
+        v-for="(item,index) in items"
+        :key="index"
+      >
+        <router-link
+          :to="item.URL"
+          active-class="active"
         >
-          <router-link
-            :to="item.URL"
-            active-class="active"
-          >
-          <i :class="item.font" class="icon iconfont"></i>
+          <i
+            :class="item.font"
+            class="icon iconfont"
+          ></i>
           {{item.msg}}
-          </router-link>
-        </el-col>
-      </el-row>
-    </el-footer>
-  </div>
+        </router-link>
+      </el-col>
+    </el-row>
+  </el-footer>
 </template>
 
 <script>
@@ -29,18 +30,18 @@ export default {
   data() {
     return {
       items: [
-        { msg: "首页", URL: "/home",font:'icon-home' },
-        { msg: "市场", URL: "/market",font:'icon-lefenshichang' },
-        { msg: "消息", URL: "/news",font:'icon-news' },
-        { msg: "我的", URL: "/me",font:'icon-aui-icon-my' }
-      ],
+        { msg: "首页", URL: "/home", font: "icon-home" },
+        { msg: "市场", URL: "/market", font: "icon-lefenshichang" },
+        { msg: "消息", URL: "/news", font: "icon-news" },
+        { msg: "我的", URL: "/me", font: "icon-aui-icon-my" }
+      ]
     };
-  },
+  }
 };
 </script>
 
 <style scoped>
-@import '../assets/iconfont/iconfont.css';
+@import "../assets/iconfont/iconfont.css";
 #footer {
   background: white;
   border-top: 1px solid #cfe4db;
@@ -48,20 +49,19 @@ export default {
   bottom: 0;
   left: 0;
   width: 100%;
-   padding:2px;
+  padding: 2px;
   z-index: 99;
 }
 #footer a {
   color: #2c3e50;
   display: block;
   text-decoration: none;
-  height:45px;
- 
+  height: 45px;
 }
-#footer a>i{
-  height:25px;
-  display:block;
-  font-size:20px;
+#footer a > i {
+  height: 25px;
+  display: block;
+  font-size: 20px;
   line-height: 25px;
 }
 #footer .active a,
