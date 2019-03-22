@@ -64,7 +64,6 @@ export default {
   font-size: 20px;
   line-height: 25px;
 }
-#footer .active a,
 .active {
   background: #f0f9eb;
   color: #67c23a !important;

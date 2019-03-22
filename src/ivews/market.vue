@@ -1,7 +1,5 @@
 <template>
   <div id="market">
-    <headDiv :title="titleMsg"></headDiv>
-
     <scroller
       ref="my_scroller"
       :on-refresh="refresh"
@@ -29,8 +27,6 @@
         </router-link>
       </div>
     </scroller>
-
-    <bottom></bottom>
   </div>
 </template>
 
@@ -38,9 +34,7 @@
 import HeadDiv from "../components/head";
 import Bottom from "../components/bottom";
 import api from "../API/index.js";
-import Vue from "vue";
-import VueScroller from "vue-scroller";
-Vue.use(VueScroller);
+
 export default {
   data() {
     return {
@@ -58,14 +52,6 @@ export default {
     // this.getList();
   },
   methods: {
-    // getList() {
-    //   let that = this;
-    //   api.minicart.template.choices("marketList").then(response => {
-    //     if (response.res.buy) {
-    //       that.lists = response.res.buy;
-    //     }
-    //   });
-    // },
     //下拉刷新
     refresh(done) {
       setTimeout(() => {
@@ -86,8 +72,9 @@ export default {
               that.lists = that.lists.concat(response.res.buy);
               done();
             } else {
-              that.$refs.my_scroller.finishInfinite(true)
-              return;
+              setTimeout(() => {
+                that.finishInfinite(false);
+              });
             }
           })
           .catch(error => {
