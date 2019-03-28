@@ -1,32 +1,36 @@
 <template>
-  <div id="market">
-    <scroller
-      ref="my_scroller"
-      :on-refresh="refresh"
-      :on-infinite="infinite"
-      :noDataText="noDataText"
-      style="top:50px;bottom:50px;padding:10px 0;"
-    >
-      <div
-        class="lists"
-        v-for="(list,index) in lists"
-        :key="index"
+  <div>
+    <headDiv :title="titleMsg"></headDiv>
+    <div id="market">
+      <scroller
+        ref="my_scroller"
+        :on-refresh="refresh"
+        :on-infinite="infinite"
+        :noDataText="noDataText"
+        style="top:50px;bottom:50px;padding:10px 0;"
       >
-        <router-link :to="{path:'/details',query:{id:list.id}}">
-          <img :src="list.imgURL">
-          <div class="listContent">
-            <div class="half">
-              <h3>{{list.username}}</h3>
-              <p>{{list.date}}</p>
+        <div
+          class="lists"
+          v-for="(list,index) in lists"
+          :key="index"
+        >
+          <router-link :to="{path:'/details',query:{id:list.id}}">
+            <img :src="list.imgURL">
+            <div class="listContent">
+              <div class="half">
+                <h3>{{list.username}}</h3>
+                <p>{{list.date}}</p>
+              </div>
+              <div class="half">
+                <h3>购入金额</h3>
+                <p style="color:#67c23a">{{list.amount}}</p>
+              </div>
             </div>
-            <div class="half">
-              <h3>购入金额</h3>
-              <p style="color:#67c23a">{{list.amount}}</p>
-            </div>
-          </div>
-        </router-link>
-      </div>
-    </scroller>
+          </router-link>
+        </div>
+      </scroller>
+    </div>
+    <bottom></bottom>
   </div>
 </template>
 

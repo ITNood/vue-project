@@ -18,7 +18,7 @@
         >
           <el-form-item prop="username">
             <el-input
-              v-model="ruleForm.username"
+              v-model="ruleForm.username" 
               placeholder="请输入用户名"
             ></el-input>
           </el-form-item>
@@ -83,16 +83,16 @@ export default {
               } else {
                 var storage = window.localStorage;
                 storage.setItem("token", res.res.token); //存储token
-              }
-              let token = window.localStorage.getItem("token"); //判断是否存在token并跳转路由
-              if (token) {
-                that.$router.push("/home");
-              } else {
-                that.$router.push("/");
+                let token = window.localStorage.getItem("token"); //判断是否存在token并跳转路由
+                if (token) {
+                  that.$router.push("/home");
+                } else {
+                  that.$router.push("/");
+                }
               }
             })
             .catch(err => {
-              //console.log(err);
+              console.log(err);
               // alert(err.data)
             });
         } else {

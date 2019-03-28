@@ -73,6 +73,13 @@ export default new Router({
       component: () => {
         return import('../ivews/test')
       }
+    },
+    {
+      path: '/lang',
+      name: 'Lang',
+      component:()=> {
+        return import('../ivews/lang')
+      }
     }
    
   ]

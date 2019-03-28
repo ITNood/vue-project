@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './assets/default.css'
 import 'swiper/dist/css/swiper.css'
 import VueScroller from "vue-scroller";
+import i18n from './i18n/i18n'
 
 
 Vue.use(VueScroller);
@@ -21,6 +22,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   router,
+  i18n,
   el: '#app',
   render: h => h(App)
 })
