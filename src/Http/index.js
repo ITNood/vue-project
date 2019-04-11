@@ -64,7 +64,7 @@ Axios.interceptors.response.use(
         }
 
         Message({
-            message: json_response.message || '服务器接口异常', type: 'error', duration: 6 * 1000
+            message: json_response.message || '服务器接口异常', type: 'error', duration: 5 * 1000
         });
 
         return Promise.reject(net_response);

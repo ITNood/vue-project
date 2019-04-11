@@ -74,12 +74,12 @@
     methods: {
       refresh (done) {
         setTimeout(() => {
-          var start = this.top - 1
-          for (var i = start; i > start - 10; i--) {
-            this.items.splice(0, 0, i + ' - keep walking, be 2 with you.')
-          }
-          this.top = this.top - 10
-          done()
+          // var start = this.top - 1
+          // for (var i = start; i > start - 10; i--) {
+          //   this.items.splice(0, 0, i + ' - keep walking, be 2 with you.')
+          // }
+          // this.top = this.top - 10
+           done()
         }, 1500)
       },
 

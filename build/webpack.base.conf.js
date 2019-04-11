@@ -51,10 +51,7 @@ module.exports = {
       //添加less
       {
         test: /\.less$/,
-        use: [
-          'style-loader',
-          'less-loader'
-        ]
+        loader: "style-loader!css-loader!less-loader",
       },
 
       {

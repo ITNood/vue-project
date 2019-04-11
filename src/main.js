@@ -10,14 +10,11 @@ import 'swiper/dist/css/swiper.css'
 import VueScroller from "vue-scroller";
 import i18n from './i18n/i18n'
 
-
 Vue.use(VueScroller);
 
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
-
-
 
 /* eslint-disable no-new */
 new Vue({
